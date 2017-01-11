@@ -1,6 +1,85 @@
 # react-dapp
 A React app created, ejected and modified to be a Truffle Dapp
 
+So now we've seen how easy it is to create a react application and we've seen how easy it is to create a Dapp with Truffle.
+
+So how do we combine these into a cohesive development environment?
+
+```Linux
+create-react-app react-truffle
+cd react-truffle
+npm run eject # to 'unhide' the transitive dependencies
+```
+
+Now let's start configuring our react application with truffle integration.
+
+Following along with this Truffle tutorial [Bundling with Webpack](http://truffleframework.com/tutorials/bundling-with-webpack), we'll
+install some dependencies.  Since the ejected React app already has webpack and
+webpack-dev-server installed, we just install the truffle-solidity-loader to
+enable Solidity support.
+
+```Linux
+npm install truffle-solidity-loader --save-dev
+```
+
+Configure Webpack
+Edit `config\webpack.config.dev.js` and `config\webpack.prod.js` to load `.sol` files from your project.
+
+```
+module: {
+  // First, run the linter.
+  // It's important to do this before Babel processes the JS.
+  preLoaders: [
+    {
+      test: /\.(js|jsx)$/,
+      loader: 'eslint',
+      include: paths.appSrc,
+    }
+  ],
+  loaders: [
+  ...
+  },
+  {
+    test: /\.sol/, loader: 'truffle-solidity'
+  }
+]
+},
+...
+```
+
+Next, create a truffle folder so we can isolate the Ethereum portfion of our Dapp.
+
+Create a truffle.js
+Your truffle.js will not have any build configuration since webpack will handle
+building your web application.  (What happens if you run truffle build?)
+
+The only configuration in truffle.js is non-web configuration such as rpc.
+
+```javascript
+module.exports = {
+  rpc: {
+    host: "localhost",
+    port: 8545
+  }
+}
+```
+Create .babelrc file at in the truffle folder.  Without this, running truffle
+commands will error due to a conflict with the babel-presets already defined
+in our base React app.  (TODO - verify which setting is conflicting with?)
+
+```JSON
+{
+  "presets": ["es2015"]
+}
+```
+
+Copy example contracts from truffle-basic project to our truffle folder
+Copy migrations folder from truffle-basic project to our truffle folder
+Copy test folder from truffle-basic project to our truffle folder
+
+We need to test that all our truffle functionality still works.
+
+
 -----------------------------
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
@@ -915,7 +994,7 @@ This feature is experimental and still [has major usage issues](https://github.c
 
 ### Editor Integration
 
-If you use [Visual Studio Code](https://code.visualstudio.com), there is a [Jest extension](https://github.com/orta/vscode-jest) which works with Create React App out of the box. This provides a lot of IDE-like features while using a text editor: showing the status of a test run with potential fail messages inline, starting and stopping the watcher automatically, and offering one-click snapshot updates. 
+If you use [Visual Studio Code](https://code.visualstudio.com), there is a [Jest extension](https://github.com/orta/vscode-jest) which works with Create React App out of the box. This provides a lot of IDE-like features while using a text editor: showing the status of a test run with potential fail messages inline, starting and stopping the watcher automatically, and offering one-click snapshot updates.
 
 ![VS Code Jest Preview](https://cloud.githubusercontent.com/assets/49038/20795349/a032308a-b7c8-11e6-9b34-7eeac781003f.png)
 
