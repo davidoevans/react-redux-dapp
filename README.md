@@ -79,6 +79,182 @@ Copy test folder from truffle-basic project to our truffle folder
 
 We need to test that all our truffle functionality still works.
 
+# React
+Now let's add some structure to the React portion of this react-dapp project.
+The next few sections will walk through creating a healthy base structure
+to support a reactive Dapp application.
+
+## Bootstrap
+Download the latest [Bootstrap libraries](http://getbootstrap.com/) and save
+`bootstrap.min.css` and `bootstrap-theme.min.css` to `public/css` folder.  Save
+the corresponding `boostrap.min.js` to `public/js` folder as well as a version
+ [jquery](https://jquery.com/).  It's unlikely you'll need `jquery` anywhere
+else in your project but some of the `Bootstrap` components use it.
+
+Now update the `/public/index.html` to link the stylesheets and include the
+stylesheets.
+
+```
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    ...
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+```
+
+## Remove default React src
+Delete the `App.css`, `App.js`, `App.test.js`, `index.css`, and `logo.svg` from
+the `src` folder.
+
+## Leverage react-router
+This project will leverage react-router.
+
+```Linux
+npm install --save-dev react-router
+```
+
+Update `src/index.js`.
+
+```javascript
+import React from 'react';
+import ReactDOM  from 'react-dom';
+import Routes from './routes/Routes.jsx';
+
+ReactDOM.render(<Routes /> , document.getElementById('root'));
+```
+
+## What I like about react
+Once you have a base project structure in place, React development involves
+creating a collection of reusable components.
+
+Create the `src/components/Routes.jsx'
+
+```JSX
+import React from 'react';
+import { hashHistory, Router, Route, IndexRoute } from 'react-router';
+
+import BasePage from './BasePage.jsx';
+import HomePage from './HomePage.jsx';
+import SimpleWallet from './wallets/SimpleWallet.jsx';
+
+var Routes = React.createClass({
+  render: function() {
+    return (
+      <Router history={hashHistory}>
+        <Route path="/" component={BasePage}>
+          <IndexRoute component={HomePage} />
+          <Route path="/simplewallet" component={SimpleWallet} />
+        </Route>
+      </Router>
+    )
+  }
+});
+
+module.exports = Routes;
+```
+
+## Create BasePage.jsx
+This creates the common components of our application such as a Navigation Bar.
+
+```JSX
+var React = require('react');
+var NavBar = require('./nav/NavBar.jsx');
+
+var navLinks = [{title: "Simple Wallet", href: "/simplewallet"}];
+
+var BasePage = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <NavBar navData={navLinks} />
+        {this.props.children}
+      </div>
+    );
+  }
+});
+
+module.exports = BasePage;
+```
+
+## Create a bootstrap NavBar and associated NavItem components
+```JSX
+var React = require('react');
+var NavItem = require('./NavItem.jsx');
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
+
+var NavBar = React.createClass({
+  render: function() {
+
+    var navStyle = {
+      WebkitBoxShadow: "0 0 4px rgba(0,0,0,0.4)",
+      MozBoxShadow: "0 0 4px rgba(0,0,0,0.4)",
+      boxShadow: "0 0 4px rgba(0,0,0,0.4)",
+      borderRadius: 0
+    };
+
+    var createLinkItem = function(item, index) {
+      return <NavItem key={item.title + index} href={item.href} title={item.title} />
+    };
+
+    return (
+      <div>
+        <nav style={navStyle} className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <Link className="navbar-brand" to="/">react-dapp</Link>
+            </div>
+            <div className="collapse navbar-collapse" id="nav-collapse">
+              <ul className="nav navbar-nav">{this.props.navData.map(createLinkItem)} </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    );
+  }
+});
+
+module.exports = NavBar;
+```
+
+```JSX
+var React = require('react');
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
+
+var NavItem = React.createClass({
+  getInitialState: function() {
+    return {hover: false};
+  },
+  mouseOver: function(e) {
+    this.setState({hover: true});
+  },
+  mouseOut: function(e) {
+    this.setState({hover: false});
+  },
+  render: function() {
+    return (
+      <li className={this.state.hover ? "active" : ""} onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
+        <Link style={this.props.aStyle} to={this.props.href}>{this.props.title}</Link>
+      </li>
+    );
+  }
+});
+
+module.exports = NavItem;
+```
 
 -----------------------------
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
