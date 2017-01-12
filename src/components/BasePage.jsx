@@ -6,7 +6,7 @@ var navLinks = [{title: "Simple Wallet", href: "/simplewallet"}];
 var BasePage = React.createClass({
   render: function() {
     return (
-      <div>
+      <div className="container">
         <NavBar navData={navLinks} />
         {this.props.children}
       </div>
