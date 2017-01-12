@@ -256,6 +256,51 @@ var NavItem = React.createClass({
 module.exports = NavItem;
 ```
 
+## Create the HomePage.jsx component
+```JSX
+var React = require('react');
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
+
+var HomePage = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <h1>Welcome to react-dapp.</h1>
+        <p>If you're wondering how you got here,
+          see <Link to="https://github.com/davidoevans/react-dapp">react-dapp</Link>
+        </p>
+      </div>
+    );
+  }
+});
+
+module.exports = HomePage;
+```
+
+## Create the SimpleWallet.jsx component
+
+## Introduce refluxjs
+This will introduce a unidirectional dataflow architecture which enables any
+registered components to 'react' to events they are registered to.  We'll use
+this along with Solidity Smart Contract events to make some dynamic components
+in our Dapp.
+
+Create `src/components/reflux/actions.jsx`
+
+```JSX
+import Reflux from 'reflux';
+
+var Actions = Reflux.createActions([
+  'Deposit',
+  'Withdrawal'
+]);
+
+module.exports = Actions;
+```
+
+# Creating the SimpleWallet contract
+
 -----------------------------
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
