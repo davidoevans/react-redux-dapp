@@ -1,7 +1,15 @@
 import React from 'react';
 import AmountField from './AmountField.jsx';
+import SendButton from './SendButton.jsx';
 
 var SimpleWallet = React.createClass({
+  getInitialState: function() {
+    return {val: ""};
+  },
+  handleClick: function(val, e) {
+    // send the ether
+    console.log(this.refs.fieldAmount.state.amount);
+  },
   render: function() {
     return (
       <div className="row">
@@ -14,8 +22,8 @@ var SimpleWallet = React.createClass({
               <div className="col-sm-3">
                 <AmountField ref="fieldAmount" />
               </div>
-              <div className="col-xs-3">
-                <button className="btn btn-success btn-raised" onClick={this.props.onClick}>Send</button>
+              <div className="col-sm-3">
+                <SendButton onClick={this.handleClick} value={this.state.value} />
               </div>
             </div>
           </div>
