@@ -73,9 +73,9 @@ in our base React app.  (TODO - verify which setting is conflicting with?)
 }
 ```
 
-Copy example contracts from truffle-basic project to our truffle folder
-Copy migrations folder from truffle-basic project to our truffle folder
-Copy test folder from truffle-basic project to our truffle folder
+* Copy example contracts from truffle-basic project to our truffle folder
+* Copy migrations folder from truffle-basic project to our truffle folder
+* Copy test folder from truffle-basic project to our truffle folder
 
 We need to test that all our truffle functionality still works.
 
@@ -285,6 +285,11 @@ This will introduce a unidirectional dataflow architecture which enables any
 registered components to 'react' to events they are registered to.  We'll use
 this along with Solidity Smart Contract events to make some dynamic components
 in our Dapp.
+
+Install reflux.
+```Linux
+npm install --save-dev reflux
+```
 
 Create `src/components/reflux/actions.jsx`
 
