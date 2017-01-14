@@ -156,8 +156,7 @@ module.exports = {
         }
       },
       {
-        test: /\.sol/,
-        loader: 'truffle-solidity
+        test: /\.sol/, loader: 'truffle-solidity'
       }
     ]
   },

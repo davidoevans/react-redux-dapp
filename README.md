@@ -63,14 +63,15 @@ module.exports = {
   }
 }
 ```
-Create .babelrc file at in the truffle folder.  Without this, running truffle
-commands will error due to a conflict with the babel-presets already defined
-in our base React app.  (TODO - verify which setting is conflicting with?)
+Edit `package.json` babel preset settings to `es2015`.  Without this,
+running truffle commands will error.
 
-```JSON
-{
-  "presets": ["es2015"]
-}
+```Javascript
+"babel": {
+  "presets": [
+    "es2015"
+  ]
+},
 ```
 
 * Copy example contracts from truffle-basic project to our truffle folder

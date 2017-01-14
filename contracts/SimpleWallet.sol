@@ -3,6 +3,7 @@ pragma solidity ^0.4.4;
 contract SimpleWallet {
 
   address owner;
+  address another;
   mapping(address => bool) isAllowedToSendFundsMapping;
 
   event Deposit(address _sender, uint amount);
