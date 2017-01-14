@@ -4,12 +4,15 @@ import Web3 from 'web3';
 
 import Actions from '../reflux/actions.jsx';
 import WalletStore from '../reflux/WalletStore.jsx';
+import AccountDropdown from '../accounts/AccountDropdown';
 import AmountField from './AmountField.jsx';
 import SendButton from './SendButton.jsx';
 
+// import SimpleWallet from '../../../contracts/SimpleWallet.sol';
+
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
-var SimpleWallet = React.createClass({
+var SimpleWalletContainer = React.createClass({
   mixins:[Reflux.listenTo(WalletStore, 'onChange')],
   getInitialState: function() {
     return {from: "", to: "", amount: ""};
@@ -36,6 +39,10 @@ var SimpleWallet = React.createClass({
           </div>
           <div className="panel-body">
             <div className="row">
+              <label className="col-sm-2 control-label">Account</label>
+              <div className="col-sm-3">
+                <AccountDropdown ref="account" />
+              </div>
               <div className="col-sm-3">
                 <AmountField ref="fieldAmount" />
               </div>
@@ -50,4 +57,4 @@ var SimpleWallet = React.createClass({
   }
 });
 
-module.exports = SimpleWallet;
+module.exports = SimpleWalletContainer;

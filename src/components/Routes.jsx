@@ -3,7 +3,7 @@ import { hashHistory, Router, Route, IndexRoute } from 'react-router';
 
 import BasePage from './BasePage.jsx';
 import HomePage from './HomePage.jsx';
-import SimpleWallet from './wallets/SimpleWallet.jsx';
+import SimpleWalletContainer from './wallets/SimpleWalletContainer.jsx';
 
 var Routes = React.createClass({
   render: function() {
@@ -11,7 +11,7 @@ var Routes = React.createClass({
       <Router history={hashHistory}>
         <Route path="/" component={BasePage}>
           <IndexRoute component={HomePage} />
-          <Route path="/simplewallet" component={SimpleWallet} />
+          <Route path="/simplewallet" component={SimpleWalletContainer} />
         </Route>
       </Router>
     )

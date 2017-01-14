@@ -2,7 +2,8 @@ import Reflux from 'reflux';
 
 var Actions = Reflux.createActions([
   'Deposit',
-  'Withdrawal'
+  'Withdrawal',
+  'getAccounts'
 ]);
 
 module.exports = Actions;
