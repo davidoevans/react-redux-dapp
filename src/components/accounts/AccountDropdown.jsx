@@ -1,6 +1,6 @@
 import React from 'react';
-import Actions from '../reflux/actions.jsx';
 import Reflux from 'reflux';
+import Actions from '../reflux/actions.jsx';
 import AccountStore from '../reflux/AccountStore.jsx';
 
 var AccountDropdown = React.createClass({
@@ -11,12 +11,12 @@ var AccountDropdown = React.createClass({
   componentWillMount: function() {
     Actions.getAccounts();
   },
-  onChange: function(event, accounts) {
-    this.setState({accounts: accounts});
+  onChange: function(event, _accounts) {
+    this.setState({accounts: _accounts});
   },
   render: function() {
     var accounts = this.state.accounts.map(function(account) {
-      return <option>{account}</option>
+      return <option key={account.address}>{account.address}</option>
     });
 
     return (

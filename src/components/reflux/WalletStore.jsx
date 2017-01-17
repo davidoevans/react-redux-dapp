@@ -15,6 +15,12 @@ var WalletStore = Reflux.createStore({
       this.fireUpdate();
     }.bind(this));
   },
+  Withdrawal: function() {
+    HTTP.get('/withdraw').then(function(_amount) {
+      this.amount = _amount;
+      this.fireUpdate();
+    }.bind(this));
+  },
   // Refresh function
   fireUpdate: function() {
     this.trigger('change', this.amount);

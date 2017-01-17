@@ -62,6 +62,13 @@ module.exports = {
     port: 8545
   }
 }
+
+Uninstall babel-preset-react-app
+
+```Linux
+npm uninstall --save-dev babel-preset-react-app
+```
+
 ```
 Edit `package.json` babel preset settings to `es2015`.  Without this,
 running truffle commands will error.
