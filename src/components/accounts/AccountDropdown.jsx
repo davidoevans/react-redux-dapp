@@ -6,13 +6,18 @@ import AccountStore from '../reflux/AccountStore.jsx';
 var AccountDropdown = React.createClass({
   mixins: [Reflux.listenTo(AccountStore, 'onChange')],
   getInitialState: function() {
-    return {accounts: []};
+    return {from: "", accounts: []};
   },
   componentWillMount: function() {
     Actions.getAccounts();
   },
   onChange: function(event, _accounts) {
-    this.setState({accounts: _accounts});
+    console.log('Changed to: ' + _accounts);
+    this.setState({from: _accounts[0].address, accounts: _accounts});
+  },
+  handleSelect: function(event, _account) {
+    console.log('Selected ' + event.target.value);
+    this.setState({from: event.target.value});
   },
   render: function() {
     var accounts = this.state.accounts.map(function(account) {
@@ -21,7 +26,7 @@ var AccountDropdown = React.createClass({
 
     return (
       <div className="form-group">
-        <select className="form-control">
+        <select className="form-control" onChange={this.handleSelect} value={this.state.from}>
           {accounts}
         </select>
       </div>

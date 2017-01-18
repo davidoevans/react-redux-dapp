@@ -20,9 +20,11 @@ var SimpleWalletView = React.createClass({
   },
   handleClick: function(val, e) {
     // send the ether
-    console.log(this.refs.fieldAmount.state.amount);
-    console.log("web3.eth.coinbase called directly: " + web3.eth.coinbase);
-    var wallet = SimpleWallet.deployed()
+    console.log("amount: " + this.refs.fieldAmount.state.amount);
+//    console.log("web3.eth.coinbase called directly: " + web3.eth.coinbase);
+    console.log("from: " + this.refs.account.state.from);
+
+//    var wallet = SimpleWallet.deployed()
 
   },
   render: function() {

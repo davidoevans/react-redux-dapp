@@ -22,20 +22,12 @@ enable Solidity support.
 npm install truffle-solidity-loader --save-dev
 ```
 
-Configure Webpack
-Edit `config\webpack.config.dev.js` and `config\webpack.prod.js` to load `.sol` files from your project.
+## Configure Webpack
+To configure the development environment so Webpack will use the `truffle-solidity-loader` to recompile and migrate updates to Solidity contracts, edit `config\webpack.config.dev.js` to load `.sol` files from your project.
 
-```
+```Javascript
 module: {
-  // First, run the linter.
-  // It's important to do this before Babel processes the JS.
-  preLoaders: [
-    {
-      test: /\.(js|jsx)$/,
-      loader: 'eslint',
-      include: paths.appSrc,
-    }
-  ],
+  ...
   loaders: [
   ...
   },
@@ -63,10 +55,12 @@ module.exports = {
   }
 }
 
-Uninstall babel-preset-react-app
+`babel-preset-react-app` conflicts with the `es2015` preset so used by Truffle so
+replace that with `babel-preset-react` so both will play nice.
 
 ```Linux
 npm uninstall --save-dev babel-preset-react-app
+npm install --save-dev babel-preset-react
 ```
 
 ```
@@ -76,6 +70,7 @@ running truffle commands will error.
 ```Javascript
 "babel": {
   "presets": [
+    "react",
     "es2015"
   ]
 },
@@ -288,11 +283,15 @@ module.exports = HomePage;
 
 ## Create the SimpleWallet.jsx component
 
-## Introduce refluxjs
+## Introduce RefluxJS
 This will introduce a unidirectional dataflow architecture which enables any
 registered components to 'react' to events they are registered to.  We'll use
 this along with Solidity Smart Contract events to make some dynamic components
 in our Dapp.
+
+See [React.js + Reflux Example](https://blog.ochronus.com/react-js-reflux-example-2d46a4d8faf0#.qujzxaj9d)
+for a good explanation.
+
 
 Install reflux.
 ```Linux
@@ -305,12 +304,14 @@ Create `src/components/reflux/actions.jsx`
 import Reflux from 'reflux';
 
 var Actions = Reflux.createActions([
-  'Deposit',
-  'Withdrawal'
+  'getAccounts'
 ]);
 
 module.exports = Actions;
 ```
+
+## Create AccountStore
+AccountStore will implement `getAccounts` and other Account related services.
 
 # Creating the SimpleWallet contract
 

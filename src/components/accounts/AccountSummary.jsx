@@ -25,7 +25,6 @@ var AccountSummary = React.createClass({
     });
 
     var rows = this.state.accounts.map(function(account) {
-      //var cells = (<td>{account.address}</td>);
       var cells = cols.map(function(col) {
         return <td key={col.key}>{String(account[col.key])}</td>
       });

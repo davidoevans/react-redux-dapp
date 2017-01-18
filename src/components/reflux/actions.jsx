@@ -1,7 +1,8 @@
 import Reflux from 'reflux';
 
 var Actions = Reflux.createActions([
-  'getAccounts'
+  'getAccounts',
+  'getBalance'
 ]);
 
 module.exports = Actions;
