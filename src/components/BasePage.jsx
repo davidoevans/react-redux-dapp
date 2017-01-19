@@ -1,7 +1,8 @@
 var React = require('react');
 var NavBar = require('./nav/NavBar.jsx');
 
-var navLinks = [{title: "Simple Wallet", href: "/simplewallet"}];
+var navLinks = [{title: "Simple Wallet", href: "/simplewallet"},
+  {title: "MetaCoin", href: "/metacoin"}];
 
 var BasePage = React.createClass({
   render: function() {
