@@ -3,7 +3,9 @@ import React from 'react';
 var SendMetaButton = React.createClass({
   render: function() {
     return (
-      <p>button</p>
+      <div className="col-sm-3">
+        <p>button</p>
+      </div>
     );
   }
 });

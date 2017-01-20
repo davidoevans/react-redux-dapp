@@ -3,7 +3,9 @@ import React from 'react';
 var AmountInput = React.createClass({
   render: function() {
     return (
-      <p>amount</p>
+      <div className="col-sm-3">
+        <p>amount</p>
+      </div>
     );
   }
 });

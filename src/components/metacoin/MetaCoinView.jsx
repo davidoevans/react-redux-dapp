@@ -10,10 +10,9 @@ var MetaCoinView = React.createClass( {
   },
   render: function() {
     return (
-      <div className="container">
         <div className="row">
           <div className="panel panel-primary">
-            <div className="panel-heading text-center">
+            <div className="panel-heading">
               <h3><b>MetaCoin</b> Example React Truffle Dapp</h3>
               <br />
               <h3>You have <b>META</b></h3>
@@ -44,9 +43,8 @@ var MetaCoinView = React.createClass( {
             </div>
           </div>
         </div>
-      </div>
     );
   }
 })
 
-module.export = MetaCoinView;
+module.exports = MetaCoinView;

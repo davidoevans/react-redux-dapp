@@ -3,7 +3,9 @@ import React from 'react';
 var AddressDropdown = React.createClass({
   render: function() {
     return (
-      <p>address</p>
+      <div className="col-sm-3">
+        <p>address</p>
+      </div>
     );
   }
 });
