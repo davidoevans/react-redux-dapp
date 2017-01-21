@@ -1,6 +1,6 @@
 import React from 'react';
 
-var SendMetaButton = React.createClass({
+var SendButton = React.createClass({
   handleClick: function(e) {
     this.props.onSend(e.target.value);
   },
@@ -13,4 +13,4 @@ var SendMetaButton = React.createClass({
   }
 });
 
-module.exports = SendMetaButton;
+module.exports = SendButton;

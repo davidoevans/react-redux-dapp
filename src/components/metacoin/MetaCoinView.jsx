@@ -1,8 +1,8 @@
 import React from 'react';
 
-import AddressDropdown from './AddressDropdown';
-import AmountInput from './AmountInput';
-import SendMetaButton from './SendMetaButton';
+import AddressDropdown from '../accounts/AddressDropdown.jsx';
+import AmountInput from '../inputs/AmountInput.jsx';
+import SendButton from '../buttons/SendButton.jsx';
 
 var MetaCoinView = React.createClass( {
   getInitialState: function() {
@@ -35,7 +35,7 @@ var MetaCoinView = React.createClass( {
               <div className="row">
                 <div className="col-sm-6">
                   <label className="col-sm-1 control-label">Amount:</label>
-                  <AmountInput value={this.state.amount} onChange={this.handleAmountChange}/>
+                  <AmountInput value={this.state.value} onChange={this.handleAmountChange}/>
                 </div>
               </div>
               <div className="row">
@@ -46,7 +46,7 @@ var MetaCoinView = React.createClass( {
               </div>
               <div className="row">
                 <div className="col-sm-3">
-                  <SendMetaButton onSend={this.handleSend} />
+                  <SendButton onSend={this.handleSend} />
                 </div>
               </div>
             </div>

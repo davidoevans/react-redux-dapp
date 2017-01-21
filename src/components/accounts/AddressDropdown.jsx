@@ -23,12 +23,10 @@ var AddressDropdown = React.createClass({
     });
 
     return (
-      <div className="col-sm-4">
-        <div className="form-group">
-          <select className="form-control" onChange={this.handleSelect} value={this.state.value}>
-            {accounts}
-          </select>
-        </div>
+      <div className="form-group">
+        <select className="form-control" onChange={this.handleSelect} >
+          {accounts}
+        </select>
       </div>
     )
   }

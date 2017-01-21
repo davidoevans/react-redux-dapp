@@ -5,9 +5,9 @@ import Web3 from 'web3';
 import Actions from '../reflux/actions.jsx';
 // import WalletStore from '../reflux/WalletStore.jsx';
 import AccountSummary from '../accounts/AccountSummary';
-import AccountDropdown from '../accounts/AccountDropdown';
-import AmountField from './AmountField.jsx';
-import SendButton from './SendButton.jsx';
+import AddressDropdown from '../accounts/AddressDropdown';
+import AmountInput from '../inputs/AmountInput.jsx';
+import SendButton from '../buttons/SendButton.jsx';
 
 import SimpleWallet from '../../../contracts/SimpleWallet.sol';
 
@@ -18,14 +18,15 @@ var SimpleWalletView = React.createClass({
   getInitialState: function() {
     return {from: "", to: "", amount: "", balance: ""};
   },
-  handleClick: function(val, e) {
-    // send the ether
-    console.log("amount: " + this.refs.fieldAmount.state.amount);
-//    console.log("web3.eth.coinbase called directly: " + web3.eth.coinbase);
-    console.log("from: " + this.refs.account.state.from);
-
-//    var wallet = SimpleWallet.deployed()
-
+  handleAmountChange: function(value) {
+    this.setState({amount: value});
+  },
+  handleAddressSelect: function(value) {
+    this.setState({from: value});
+  },
+  handleSend: function() {
+    console.log('sending ' + this.state.amount + ' from ' + this.state.from);
+    //    var wallet = SimpleWallet.deployed()
   },
   render: function() {
     return (
@@ -43,17 +44,17 @@ var SimpleWalletView = React.createClass({
             <div className="row">
               <label className="col-sm-1 control-label">Account:</label>
               <div className="col-sm-3">
-                <AccountDropdown ref="account" />
+                <AddressDropdown onSelect={this.handleAddressSelect} />
               </div>
               <label className="col-sm-1 control-label">Balance:</label>
               <div className="col-sm-3">
                 <input className="form-control" type="text" value={this.state.balance} readOnly/>
               </div>
               <div className="col-sm-3">
-                <AmountField ref="fieldAmount" />
+                <AmountInput value={this.state.value} onChange={this.handleAmountChange} />
               </div>
               <div className="col-sm-3">
-                <SendButton onClick={this.handleClick} value={this.state.value} />
+                <SendButton onSend={this.handleSend} />
               </div>
             </div>
           </div>
