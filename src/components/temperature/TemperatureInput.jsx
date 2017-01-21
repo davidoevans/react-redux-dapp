@@ -5,14 +5,13 @@ const scaleNames = {
   f: 'Fahrenheit'
 };
 
-var Temperature = React.createClass({
-  getInitialState: function() {
-    return {value: ''};
-  },
+var TemperatureInput = React.createClass({
   handleChange: function(event) {
-    this.setState({value: event.target.value});
+    this.props.onChange(event.target.value);
   },
   render: function() {
+    const value = this.props.value;
+    const scale = this.props.scale;
     return (
       <fieldset>
         <legend>Enter temperature in {scaleNames[scale]}:</legend>
@@ -22,4 +21,4 @@ var Temperature = React.createClass({
   }
 });
 
-moduel.exports = Temperature;
+module.exports = TemperatureInput;

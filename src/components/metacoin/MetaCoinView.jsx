@@ -6,7 +6,16 @@ import SendMetaButton from './SendMetaButton';
 
 var MetaCoinView = React.createClass( {
   getInitialState: function() {
-    return {account: "", amount: ""};
+    return {toAddress: "", amount: ""};
+  },
+  handleAmountChange: function(value) {
+    this.setState({amount: value});
+  },
+  handleAddressSelect: function(value) {
+    this.setState({toAddress: value});
+  },
+  handleSend: function() {
+    console.log('sending ' + this.state.amount + " to " + this.state.toAddress);
   },
   render: function() {
     return (
@@ -26,18 +35,18 @@ var MetaCoinView = React.createClass( {
               <div className="row">
                 <div className="col-sm-6">
                   <label className="col-sm-1 control-label">Amount:</label>
-                  <AmountInput name="amount" />
+                  <AmountInput value={this.state.amount} onChange={this.handleAmountChange}/>
                 </div>
               </div>
               <div className="row">
                 <div className="col-sm-6">
                   <label className="col-sm-1 control-label">To Address:</label>
-                  <AddressDropdown name="from" />
+                  <AddressDropdown onSelect={this.handleAddressSelect} />
                 </div>
               </div>
               <div className="row">
                 <div className="col-sm-3">
-                  <SendMetaButton onClick={this.handleClick} value={this.state.value} />
+                  <SendMetaButton onSend={this.handleSend} />
                 </div>
               </div>
             </div>
