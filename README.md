@@ -1,6 +1,10 @@
 # react-dapp
 A React app created, ejected and modified to be a Truffle Dapp
 
+# This is how to use it
+You'll need `node` and `npm installed`.  Once you'ved cloned or forked the project, run `npm install`.
+
+# This is how it was built
 So now we've seen how easy it is to create a react application and we've seen how easy it is to create a Dapp with Truffle.
 
 So how do we combine these into a cohesive development environment?
