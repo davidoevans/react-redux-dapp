@@ -3,10 +3,11 @@ import Reflux from 'reflux';
 import Web3 from 'web3';
 
 import Actions from '../reflux/actions.jsx';
-// import WalletStore from '../reflux/WalletStore.jsx';
+import AccountStore from '../reflux/AccountStore.jsx';
 import AccountSummary from '../accounts/AccountSummary';
 import AddressDropdown from '../accounts/AddressDropdown';
 import AmountInput from '../inputs/AmountInput.jsx';
+import BalanceField from './BalanceField.jsx';
 import SendButton from '../buttons/SendButton.jsx';
 
 //import SimpleWallet from '../../../contracts/SimpleWallet.sol';
@@ -27,9 +28,20 @@ var simplewallet = simplewalletContract.new(
  })
 
 var SimpleWalletView = React.createClass({
-//  mixins: [Reflux.listenTo(WalletStore, 'onChange')],
+  mixins: [Reflux.listenTo(AccountStore, 'onChange')],
   getInitialState: function() {
-    return {from: "", to: "", amount: "", balance: "", allowed: false};
+    return {accounts: [], from: "", to: "", amount: "", balance: "", allowed: false};
+  },
+  componentWillMount: function() {
+    Actions.getAccounts;
+  },
+  onChange: function(event, _accounts) {
+    const defaultAddress = _accounts[0].address;
+
+    // TODO get allowed from _accounts and/or store
+    this.setState({accounts: _accounts, from: defaultAddress,
+      balance: _accounts[0].balance /* web3.fromWei(web3.eth.getBalance(defaultAddress), 'ether')*/ ,
+      allowed: true});
   },
   handleAmountChange: function(value) {
     this.setState({amount: value});
@@ -60,7 +72,7 @@ var SimpleWalletView = React.createClass({
             <div className="row">
               <label className="col-sm-1 control-label">Account:</label>
               <div className="col-sm-7">
-                <AddressDropdown onSelect={this.handleAddressSelect} />
+                <AddressDropdown defaultOption={this.state.from} options={this.state.accounts} onSelect={this.handleAddressSelect} />
               </div>
               <div className="col-sm-3">
                 <label className="checkbox-inline">

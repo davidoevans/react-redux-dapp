@@ -18,6 +18,13 @@ var AccountStore = Reflux.createStore({
     this.accounts = _accounts;
     this.fireUpdate();
   },
+  getAddressList: function() {
+    this.addressList = web3.eth.accounts;
+    // this.addressList = _accounts.map(function(account) {
+    //   return {address: account};
+    // })
+    this.trigger('change', this.addressList);
+  },
   getBalance: function(_account) {
     this.balance = web3.fromWei(web3.eth.getBalance(_account), 'ether');
     this.trigger('change', this.balance);
