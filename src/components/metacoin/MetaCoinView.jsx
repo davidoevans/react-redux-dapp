@@ -1,7 +1,11 @@
 import React from 'react';
+import Reflux from 'reflux';
 import Web3 from 'web3';
 
+import Actions from '../reflux/actions.jsx';
+import AccountStore from '../reflux/AccountStore.jsx';
 import AddressDropdown from '../accounts/AddressDropdown.jsx';
+import AccountSummary from '../accounts/AccountSummary.jsx';
 import AmountInput from '../inputs/AmountInput.jsx';
 import SendButton from '../buttons/SendButton.jsx';
 
@@ -22,8 +26,16 @@ var metacoin = metacoinContract.new(
  })
 
 var MetaCoinView = React.createClass( {
+  mixins: [Reflux.listenTo(AccountStore, 'onChange')],
   getInitialState: function() {
-    return {toAddress: "", amount: ""};
+    return {accounts: [], toAddress: "", amount: ""};
+  },
+  componentWillMount: function() {
+    Actions.getAccounts();
+  },
+  onChange: function(event, _accounts) {
+    const defaultAddress = _accounts[0].address;
+    this.setState({accounts: _accounts, toAddress: defaultAddress});
   },
   handleAmountChange: function(value) {
     this.setState({amount: value});
@@ -61,7 +73,7 @@ var MetaCoinView = React.createClass( {
               <div className="row">
                 <div className="col-sm-6">
                   <label className="col-sm-1 control-label">To Address:</label>
-                  <AddressDropdown onSelect={this.handleAddressSelect} />
+                  <AddressDropdown defaultOption={this.state.toAddress} options={this.state.accounts} onSelect={this.handleAddressSelect} />
                 </div>
               </div>
               <div className="row">

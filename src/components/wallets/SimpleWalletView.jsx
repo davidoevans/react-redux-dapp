@@ -33,7 +33,7 @@ var SimpleWalletView = React.createClass({
     return {accounts: [], from: "", to: "", amount: "", balance: "", allowed: false};
   },
   componentWillMount: function() {
-    Actions.getAccounts;
+    Actions.getAccounts();
   },
   onChange: function(event, _accounts) {
     const defaultAddress = _accounts[0].address;
