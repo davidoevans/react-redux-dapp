@@ -3,57 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Single Page Apps for GitHub Pages</title>
-    <meta name="description" content="Lightweight solution for deploying single page apps with GitHub Pages. Code and concept by Rafael Pedicini.">
-
-    <style>
-      html, body, div, span, a, p, ul, li, h1, code, nav {
-        margin: 0;
-        border: 0;
-        padding: 0;
-        box-sizing: inherit;
-        font: inherit;
-        text-decoration: inherit;
-        text-align: inherit;
-        color: inherit;
-        background: transparent;
-      }
-      /*pass window height (w/o scroll bars) down to react app, note can't use vh becasue that
-      includes scroll bars and mobile browser footer, etc so doesn't give viewable area*/
-      html, body { height: 100%; }
-      html { background-color: rgb(0, 120, 0); }
-      #root { background-color: #F0F0F0; min-height: 100%; }
-
-      /*required for IE/Edge to be compatible with left:50vw & transform:translate(-50%, 0),
-      otherwise there is a phantom div on the right side of the screen (from the left:50vw),
-      that the window will scroll to. Note the left:50vw and transform is used to center content
-      horizaontally based on vw to prevent content jump when vertical scroll bar show/hide.*/
-      body { overflow-x: hidden; }
-    </style>
-
-    <!-- start favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="http://favicon.rafrex.com/green-grid-144-168-192/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="http://favicon.rafrex.com/green-grid-144-168-192/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="http://favicon.rafrex.com/green-grid-144-168-192/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="http://favicon.rafrex.com/green-grid-144-168-192/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="http://favicon.rafrex.com/green-grid-144-168-192/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="http://favicon.rafrex.com/green-grid-144-168-192/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="http://favicon.rafrex.com/green-grid-144-168-192/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="http://favicon.rafrex.com/green-grid-144-168-192/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="http://favicon.rafrex.com/green-grid-144-168-192/apple-touch-icon-180x180.png">
-    <link rel="icon" type="image/png" href="http://favicon.rafrex.com/green-grid-144-168-192/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="http://favicon.rafrex.com/green-grid-144-168-192/favicon-194x194.png" sizes="194x194">
-    <link rel="icon" type="image/png" href="http://favicon.rafrex.com/green-grid-144-168-192/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="http://favicon.rafrex.com/green-grid-144-168-192/android-chrome-192x192.png" sizes="192x192">
-    <link rel="icon" type="image/png" href="http://favicon.rafrex.com/green-grid-144-168-192/favicon-16x16.png" sizes="16x16">
-    <link rel="manifest" href="http://favicon.rafrex.com/green-grid-144-168-192/manifest.json">
-    <link rel="mask-icon" href="http://favicon.rafrex.com/green-grid-144-168-192/safari-pinned-tab.svg" color="#00a800">
-    <link rel="shortcut icon" href="http://favicon.rafrex.com/green-grid-144-168-192/favicon.ico">
-    <meta name="msapplication-TileColor" content="#000000">
-    <meta name="msapplication-TileImage" content="http://favicon.rafrex.com/green-grid-144-168-192/mstile-144x144.png">
-    <meta name="msapplication-config" content="http://favicon.rafrex.com/green-grid-144-168-192/browserconfig.xml">
-    <meta name="theme-color" content="#000000">
-    <!-- end favicon -->
+    <title>Single Page React DApp for GitHub Pages</title>
+    <meta name="description" content="react-dapp">
 
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
