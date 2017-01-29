@@ -29,6 +29,8 @@ Pre-requisites
     - (create-react-app)[https://github.com/facebookincubator/create-react-app] -> `npm install -g create-react-app`
 If you'd like to download the latest react-dapp project `git clone https://github.com/davidoevans/react-dapp.git`
 
+Install [uport-lib](https://github.com/ConsenSys/uport-lib) -> `npm install "git://github.com/ConsenSys/uport-lib.git#develop" --save`
+
 
 Conventions Used - regardless, JSX is compiled to Javascript by Babel
 * The ES6 `import` is used over `require`
