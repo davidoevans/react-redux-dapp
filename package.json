@@ -52,7 +52,8 @@
   },
   "dependencies": {
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "uport-lib": "git://github.com/ConsenSys/uport-lib.git#develop"
   },
   "scripts": {
     "start": "node scripts/start.js",

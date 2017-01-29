@@ -6,6 +6,7 @@ import HomePage from './HomePage.jsx';
 import SimpleWalletView from './wallets/SimpleWalletView.jsx';
 import MetaCoinView from './metacoin/MetaCoinView.jsx';
 import Calculator from './temperature/Calculator.jsx';
+import UPortView from './uport/UPortView.jsx';
 
 var Routes = React.createClass({
   render: function() {
@@ -15,6 +16,7 @@ var Routes = React.createClass({
           <IndexRoute component={HomePage} />
           <Route path="/simplewallet" component={SimpleWalletView} />
           <Route path="/metacoin" component={MetaCoinView} />
+          <Route path="/uport" component={UPortView} />
           <Route path="temperature" component={Calculator} />
         </Route>
       </Router>

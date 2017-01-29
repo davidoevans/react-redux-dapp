@@ -5,8 +5,7 @@ var AddressDropdown = React.createClass({
     this.props.onSelect(e.target.value);
   },
   render: function() {
-    console.log('this.props.options: ' + this.props.options);
-    
+        
     var accounts = this.props.options.map(function(account) {
       return <option key={account.address}>{account.address}</option>
     });

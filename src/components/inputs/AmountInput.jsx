@@ -18,7 +18,7 @@ var AmountInput = React.createClass({
     var formClass = this.state.valid ? "form-group" : "form-group has-error";
 
     return (
-      <div className="formClass">
+      <div className={formClass}>
         <input className="form-control" value={this.props.value} onChange={this.handleChange} />
       </div>
     );
