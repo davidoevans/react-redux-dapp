@@ -19,14 +19,14 @@ This course is a walk through of the journey I took to establish an environment 
 Pre-requisites
 
 - Some knowledge of Javascript
-- (NodeJS)[https://nodejs.org/en/download/current/] should be installed.  I just use the latest which as of this writing is v7.4.0 with npm 4.0.5 included.
-- The (Atom)[https://atom.io/] editor has these packages to make a nice environment for Solidity Smart Contract development.
+- [NodeJS](https://nodejs.org/en/download/current/) should be installed.  I just use the latest which as of this writing is v7.4.0 with npm 4.0.5 included.
+- The [Atom](https://atom.io/) editor has these packages to make a nice environment for Solidity Smart Contract development.
     - atom-ethereum-interface
     - language-ethereum
 - Insall these globally:
-    - (Truffle)[http://truffleframework.com/] -> `npm install -g truffle`
-    - (ethereumjs/testrpc)[https://github.com/ethereumjs/testrpc] -> `npm install -g ethereumjs-testrpc`
-    - (create-react-app)[https://github.com/facebookincubator/create-react-app] -> `npm install -g create-react-app`
+    - [Truffle](http://truffleframework.com/) -> `npm install -g truffle`
+    - [ethereumjs/testrpc](https://github.com/ethereumjs/testrpc) -> `npm install -g ethereumjs-testrpc`
+    - [create-react-app](https://github.com/facebookincubator/create-react-app) -> `npm install -g create-react-app`
 If you'd like to download the latest react-dapp project `git clone https://github.com/davidoevans/react-dapp.git`
 
 Install [uport-lib](https://github.com/ConsenSys/uport-lib) -> `npm install "git://github.com/ConsenSys/uport-lib.git#develop" --save`
