@@ -9,14 +9,24 @@ import AddressDropdown from '../accounts/AddressDropdown';
 import AmountInput from '../inputs/AmountInput.jsx';
 import SendButton from '../buttons/SendButton.jsx';
 
-//import SimpleWallet from '../../../contracts/SimpleWallet.sol';
+import { default as contract } from 'truffle-contract'
+
+// Import our contract artifacts and turn them into usable abstractions.
+import simpleWallet_artifacts from '../../../build/contracts/SimpleWallet.json'
 
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
-var simplewalletContract = web3.eth.contract([{"constant":true,"inputs":[{"name":"_address","type":"address"}],"name":"isAllowedToSend","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"},{"name":"receiver","type":"address"}],"name":"sendFunds","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"killWallet","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_address","type":"address"}],"name":"allowAddressToSendMoney","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_address","type":"address"}],"name":"disallowAddressToSendMoney","outputs":[],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_sender","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_sender","type":"address"},{"indexed":false,"name":"amount","type":"uint256"},{"indexed":false,"name":"_beneficiary","type":"address"}],"name":"Withdrawal","type":"event"}]);
+// MetaCoin is our usable abstraction, which we'll use through the code below.
+var SimpleWallet = contract(simpleWallet_artifacts);
+// Bootstrap the MetaCoin abstraction for Use.
+SimpleWallet.setProvider(web3.currentProvider);
 
-// use a simple wallet alread deployed to a specific address
-var simplewallet = simplewalletContract.at("0x02db1f86500cc71d86cf648f87e3f9ef0bf97a7c");
+// var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+//
+// var simplewalletContract = web3.eth.contract([{"constant":true,"inputs":[{"name":"_address","type":"address"}],"name":"isAllowedToSend","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"},{"name":"receiver","type":"address"}],"name":"sendFunds","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"killWallet","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_address","type":"address"}],"name":"allowAddressToSendMoney","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_address","type":"address"}],"name":"disallowAddressToSendMoney","outputs":[],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_sender","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_sender","type":"address"},{"indexed":false,"name":"amount","type":"uint256"},{"indexed":false,"name":"_beneficiary","type":"address"}],"name":"Withdrawal","type":"event"}]);
+//
+// // use a simple wallet alread deployed to a specific address
+// var simplewallet = simplewalletContract.at("0x02db1f86500cc71d86cf648f87e3f9ef0bf97a7c");
 
 // create a new insance of a wallet
 // var simplewallet = simplewalletContract.new(
@@ -52,13 +62,27 @@ var SimpleWalletView = React.createClass({
   },
   handleAddressSelect: function(value) {
     //var wallet = SimpleWallet.deployed();
-    let ether = web3.fromWei(web3.eth.getBalance(value), 'ether');
-    let allowed = simplewallet.isAllowedToSend.call(value);
+    let ether = this.props.web3.fromWei(this.props.web3.eth.getBalance(value), 'ether');
+    let allowed = true; // simplewallet.isAllowedToSend.call(value);
     this.setState({from: value, balance: ether, allowed: allowed});
   },
   handleSend: function() {
     console.log('sending ' + this.state.amount + ' from ' + this.state.from);
 
+    var wallet;
+    var amount = this.state.amount;
+    var toAddress = this.state.toAddress;
+    var fromAddress = '0xe6e8225f0c328a7e9b9a869bebb1262f25dc65cc';
+
+    SimpleWallet.deployed().then(function(instance) {
+      wallet = instance;
+      // return meta.sendCoin(this.state.toAddress, this.state.amount, {from: account});
+      return wallet.sendFunds(toAddress, amount, {from: fromAddress});
+    }).then(function() {
+      console.log('Transaction successful!');
+    }).catch(function(e) {
+      console.log(e);
+    });
   },
   render: function() {
     return (

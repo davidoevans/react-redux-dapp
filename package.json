@@ -8,8 +8,11 @@
     "babel-eslint": "7.1.1",
     "babel-jest": "17.0.2",
     "babel-loader": "6.2.7",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-es2016": "^6.22.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-react-app": "^2.0.1",
+    "babel-register": "^6.22.0",
     "case-sensitive-paths-webpack-plugin": "1.1.4",
     "chalk": "1.1.3",
     "connect-history-api-fallback": "1.3.0",
@@ -43,8 +46,9 @@
     "reflux": "^5.0.4",
     "strip-ansi": "3.0.1",
     "style-loader": "0.13.1",
-    "truffle-solidity-loader": "0.0.8",
+    "truffle-contract": "^1.1.8",
     "url-loader": "0.5.7",
+    "web3": "^0.18.2",
     "webpack": "1.14.0",
     "webpack-dev-server": "1.16.2",
     "webpack-manifest-plugin": "1.1.0",
@@ -52,13 +56,17 @@
   },
   "dependencies": {
     "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "uport-lib": "git://github.com/ConsenSys/uport-lib.git#develop"
+    "react-dom": "^15.4.2"
   },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
+  },
+  "standard": {
+    "globals": [
+      "web3"
+    ]
   },
   "jest": {
     "collectCoverageFrom": [
@@ -87,7 +95,8 @@
   "babel": {
     "presets": [
       "react",
-      "es2015"
+      "es2015",
+      "es2016"
     ]
   },
   "eslintConfig": {

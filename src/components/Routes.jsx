@@ -14,8 +14,8 @@ var Routes = React.createClass({
       <Router history={hashHistory}>
         <Route path="/" component={BasePage}>
           <IndexRoute component={HomePage} />
-          <Route path="/simplewallet" component={SimpleWalletView} />
-          <Route path="/metacoin" component={MetaCoinView} />
+          <Route path="/simplewallet" component={() => (<SimpleWalletView web3={this.props.web3} />)} />
+          <Route path="/metacoin" component={() => (<MetaCoinView web3={this.props.web3} />)} />
           <Route path="/uport" component={UPortView} />
           <Route path="temperature" component={Calculator} />
         </Route>
