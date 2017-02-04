@@ -9,13 +9,28 @@ import AccountSummary from '../accounts/AccountSummary.jsx';
 import AmountInput from '../inputs/AmountInput.jsx';
 import SendButton from '../buttons/SendButton.jsx';
 
-// import MetaCoin from '../../../build/contracts/MetaCoin.sol.js';
+import { default as contract } from 'truffle-contract'
+
+// Import our contract artifacts and turn them into usable abstractions.
+import metacoin_artifacts from '../../../build/contracts/MetaCoin.json'
+
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
-var metacoinContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"getBalanceInEth","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"receiver","type":"address"},{"name":"amount","type":"uint256"}],"name":"sendCoin","outputs":[{"name":"sufficient","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"getBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"}]);
+// MetaCoin is our usable abstraction, which we'll use through the code below.
+var MetaCoin = contract(metacoin_artifacts);
+// Bootstrap the MetaCoin abstraction for Use.
+MetaCoin.setProvider(web3.currentProvider);
 
-// access a contract already deployed to a specific address
-var metacoin = metacoinContract.at("0xb85c25f82987e295ed786b64a43bf48ccb33c2d7");
+// const provider = new Web3.providers.HttpProvider('http://localhost:8545');
+// MetaCoin.setProvider(provider);
+
+// import MetaCoin from '../../../build/contracts/MetaCoin.sol.js';
+// var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+//
+// var metacoinContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"getBalanceInEth","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"receiver","type":"address"},{"name":"amount","type":"uint256"}],"name":"sendCoin","outputs":[{"name":"sufficient","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"getBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"}]);
+//
+// // access a contract already deployed to a specific address
+// var metacoin = metacoinContract.at("0xd92099a362198f6ce5537cc5f57f0e9ca168cd6e");
 
 // Create a new contract
 // var metacoin = metacoinContract.new(
@@ -49,10 +64,26 @@ var MetaCoinView = React.createClass( {
     this.setState({toAddress: value});
   },
   handleSend: function() {
-    console.log('sending ' + this.state.amount + " to " + this.state.toAddress);
+    //console.log('sending ' + this.state.amount + " to " + this.state.toAddress);
 //    console.log(metacoin.getBalance(this.state.toAddress));
-    console.log('sending coin: ' + metacoin.sendCoin(this.state.toAddress, 100));
+    //console.log('sending coin: ' + metacoin.sendCoin(this.state.toAddress, this.state.amount));
+    // var metacoin = MetaCoin.deployed();
+    var amount = this.state.amount;
+    var toAddress = this.state.toAddress;
+    var fromAddress = '0xe6e8225f0c328a7e9b9a869bebb1262f25dc65cc';
 
+    var meta;
+    MetaCoin.deployed().then(function(instance) {
+      meta = instance;
+      // return meta.sendCoin(this.state.toAddress, this.state.amount, {from: account});
+      return meta.sendCoin(toAddress, amount, {from: fromAddress});
+    }).then(function() {
+      console.log('Transaction successful!');
+    }).catch(function(e) {
+      console.log(e);
+    });
+    // var resp = metacoin.sendCoin(this.state.toAddress, this.state.amount);
+    // console.log('resp: ' + resp);
   },
   render: function() {
     return (
