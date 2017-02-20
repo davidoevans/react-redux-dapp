@@ -74,16 +74,18 @@ export const getAllProducts = () => dispatch => {
   })
 }
 
-const transfer = transaction => ({
+const transfer = txnHash => ({
   type: types.TRANSFER,
-  transaction
+  confirmation: txnHash
 })
 
-export const emitTransfer = transaction => (dispatch, getState) => {
-  ethereum.transfer(transaction => {
-    dispatch(transfer(transaction))
+export const emitTransfer = () => (dispatch, getState) => {
+  let txn = getState().transaction.detail
+  ethereum.transfer(txn, txnHash => {
+    dispatch(transfer(txnHash))
   })
 }
+
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
 
 // Resets the currently visible error message

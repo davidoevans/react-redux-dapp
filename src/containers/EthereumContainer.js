@@ -2,14 +2,15 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { getAllAccounts } from '../reducers/accounts'
 import { getSupportedCryptos } from '../reducers/cryptos'
-import { selectFromAddress, selectToAddress, selectCrypto, enterAmount, transfer } from '../actions'
+import { selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer } from '../actions'
 import AccountItem from '../components/AccountItem'
 import AccountsList from '../components/AccountsList'
 import AddressDropdown from '../components/AddressDropdown'
 import CryptoDropdown from '../components/CryptoDropdown'
 import AmountInput from '../components/AmountInput'
+import AccountTable from '../components/AccountTable'
 
-const EthereumContainer = ({ accounts, cryptos, selectFromAddress, selectToAddress, selectCrypto, enterAmount, transfer }) => {
+const EthereumContainer = ({ accounts, cryptos, selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer }) => {
   return (
     <div className="container">
       <div className="row">
@@ -29,9 +30,10 @@ const EthereumContainer = ({ accounts, cryptos, selectFromAddress, selectToAddre
             </form>
             </div>
             <div className="col-sm-1">
-              <button type="submit" className="btn btn-primary" onClick={() => transfer()}>Transfer</button>
+              <button type="submit" className="btn btn-primary" onClick={() => emitTransfer()}>Transfer</button>
             </div>
           </div>
+          <AccountTable accounts={accounts} />
           <div className="row">
             <div className="col-sm-6">
               <AccountsList title="Accounts">
@@ -62,5 +64,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { selectFromAddress, selectToAddress, selectCrypto, enterAmount }
+  { selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer }
 )(EthereumContainer)
