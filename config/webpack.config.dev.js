@@ -46,7 +46,9 @@ module.exports = {
     // require.resolve('webpack/hot/dev-server'),
     require.resolve('react-dev-utils/webpackHotDevClient'),
     // We ship a few polyfills by default:
-    require.resolve('./polyfills'),
+    //require.resolve('./polyfills'),
+    // Set up an ES6-ish environment
+    'babel-polyfill',
     // Finally, this is your app's code:
     paths.appIndexJs
     // We include the app code last so that if there is a runtime error during
@@ -125,15 +127,16 @@ module.exports = {
       },
       // Process JS with Babel.
       {
+        loader: 'babel-loader',
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
-        loader: 'babel',
         query: {
-
+          plugins: ['transform-runtime'],
+          presets: ['es2015', 'stage-0', 'react'],
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
-          cacheDirectory: true
+          //cacheDirectory: true
         }
       },
       // "postcss" loader applies autoprefixer to our CSS.
