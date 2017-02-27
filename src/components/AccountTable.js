@@ -11,10 +11,18 @@ const columns = [{
 }, {
   header: 'Balance (ETH)',
   accessor: 'balance',
-  render: props => <span className='number'>{props.value.toNumber()}</span>}];
+  render: props => <span className='number'>{props.value.toNumber()}</span>
+}, {
+  header: 'MetaCoin',
+  accessor: 'meta'
+}];
 
 const AccountTable = ({ accounts }) => (
-  <ReactTable data={accounts} columns={columns} />
+  <ReactTable data={accounts}
+    columns={columns}
+    showPagination={false}
+    showPageSizeOptions={false}
+    defaultPageSize={10} />
 )
 
 export default AccountTable

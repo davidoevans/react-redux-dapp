@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { getAllAccounts } from '../reducers/accounts'
 import { getSupportedCryptos } from '../reducers/cryptos'
 import { selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer } from '../actions'
-import AccountItem from '../components/AccountItem'
-import AccountsList from '../components/AccountsList'
 import AddressDropdown from '../components/AddressDropdown'
 import CryptoDropdown from '../components/CryptoDropdown'
 import AmountInput from '../components/AmountInput'
@@ -34,17 +32,6 @@ const EthereumContainer = ({ accounts, cryptos, selectFromAddress, selectToAddre
             </div>
           </div>
           <AccountTable accounts={accounts} />
-          <div className="row">
-            <div className="col-sm-6">
-              <AccountsList title="Accounts">
-                {accounts.map(account =>
-                  <AccountItem
-                    key={account.address}
-                    account={account} />
-                )}
-              </AccountsList>
-            </div>
-          </div>
         </div>
       </div>
     </div>

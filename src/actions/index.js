@@ -1,5 +1,4 @@
 import ethereum from '../middleware/ethereum'
-import shop from '../middleware/shop'
 import crypto from '../middleware/crypto'
 import * as types from '../constants/ActionTypes'
 
@@ -63,17 +62,6 @@ export const enterAmount = amount => (dispatch, getState) => {
     dispatch(setAmount(amount))
 }
 
-const receiveProducts = products => ({
-  type: types.RECEIVE_PRODUCTS,
-  products: products
-})
-
-export const getAllProducts = () => dispatch => {
-  shop.getProducts(products => {
-    dispatch(receiveProducts(products))
-  })
-}
-
 const transfer = txnHash => ({
   type: types.TRANSFER,
   confirmation: txnHash
@@ -84,6 +72,7 @@ export const emitTransfer = () => (dispatch, getState) => {
   ethereum.transfer(txn, txnHash => {
     dispatch(transfer(txnHash))
   })
+  dispatch(getAllAccounts())
 }
 
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
