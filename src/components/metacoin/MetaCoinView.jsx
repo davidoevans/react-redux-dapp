@@ -70,7 +70,7 @@ var MetaCoinView = React.createClass( {
     // var metacoin = MetaCoin.deployed();
     var amount = this.state.amount;
     var toAddress = this.state.toAddress;
-    var fromAddress = '0xe6e8225f0c328a7e9b9a869bebb1262f25dc65cc';
+    var fromAddress = '0xa476c1721296c7f59ca840fe2939e4b366a6abf9';
 
     var meta;
     MetaCoin.deployed().then(function(instance) {

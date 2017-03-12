@@ -1,19 +1,19 @@
-var React = require('react');
-var NavItem = require('./NavItem.jsx');
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
+import React, { Component, PropTypes } from 'react';
+import NavItem from './NavItem';
+import { Link } from 'react-router';
 
-var NavBar = React.createClass({
-  render: function() {
+export default class NavBar extends Component {
 
-    var navStyle = {
+  render() {
+
+    const navStyle = {
       WebkitBoxShadow: "0 0 4px rgba(0,0,0,0.4)",
       MozBoxShadow: "0 0 4px rgba(0,0,0,0.4)",
       boxShadow: "0 0 4px rgba(0,0,0,0.4)",
       borderRadius: 0
     };
 
-    var createLinkItem = function(item, index) {
+    const createLinkItem = (item, index) => {
       return <NavItem key={item.title + index} href={item.href} title={item.title} />
     };
 
@@ -37,6 +37,4 @@ var NavBar = React.createClass({
       </div>
     );
   }
-});
-
-module.exports = NavBar;
+}
