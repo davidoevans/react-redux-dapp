@@ -3,7 +3,7 @@ import EthereumContainer from './EthereumContainer'
 
 const App = () => (
   <div>
-    <h2>Ethereum Example</h2>
+    <h2>put a navigation menu here</h2>
     <hr/>
     <EthereumContainer />
   </div>
