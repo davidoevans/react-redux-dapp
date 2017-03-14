@@ -1,5 +1,5 @@
 {
-  "name": "react-dapp",
+  "name": "react-redux-dapp",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {

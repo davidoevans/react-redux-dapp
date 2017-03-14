@@ -9,12 +9,21 @@ const columns = [{
   header: 'Name',
   accessor: 'name'
 }, {
-  header: 'Balance (ETH)',
-  accessor: 'balance',
-  render: props => <span className='number'>{props.value.toNumber()}</span>
-}, {
-  header: 'MetaCoin',
-  accessor: 'meta'
+  header: 'Balance',
+  columns: [{
+    header: 'Intrinsic (ETH)',
+    accessor: 'balance',
+    render: props => <span className='number'>{props.value.toNumber()}</span>
+  }, {
+    header: 'Fiat (CAD)',
+    accessor: 'cadCoin',
+    render: props => (
+          <span className="number">$ {parseFloat(Math.round(props.value * 100) / 100).toFixed(2)}</span>
+    )
+  }, {
+    header: 'MetaCoin',
+    accessor: 'meta'
+  }]
 }];
 
 const AccountTable = ({ accounts }) => (

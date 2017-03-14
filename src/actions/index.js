@@ -69,9 +69,9 @@ const transfer = txnHash => ({
 
 export const emitTransfer = () => (dispatch, getState) => {
   let txn = getState().transaction.detail
-  ethereum.transfer(txn, txnHash => {
-    dispatch(transfer(txnHash))
-  })
+  let txnHash = ethereum.transfer(txn)
+  console.log(`txnHash: ${txnHash}`)
+  dispatch(transfer(txnHash))
   dispatch(getAllAccounts())
 }
 
