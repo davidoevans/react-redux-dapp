@@ -1,8 +1,15 @@
-# react-dapp
-A React app created, ejected and modified to be a Truffle Dapp
+# react-redux-dapp
+This is a template project that can be used as the basis for an Ethereum dApp.
+
+![read-redux-dapp](docs/img/react-redux-dapp.png)
 
 # This is how to use it
-You'll need `node` and `npm installed`.  Once you'ved cloned or forked the project, run `npm install`.
+You'll need `node` and `npm installed`.  
+
+Once you'ved cloned or forked the project, run `npm install`.
+
+# Outdate notes below
+The notes below this point capture some of the journey to get here and need to be updated.
 
 # This is how it was built
 So now we've seen how easy it is to create a react application and we've seen how easy it is to create a Dapp with Truffle.
