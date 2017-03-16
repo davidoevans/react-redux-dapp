@@ -2,7 +2,7 @@
  * Ethereum service API
  */
 import Web3 from 'web3'
-import { getBalance } from './metacoin'
+import { getBalance, sendCoin } from './metacoin'
 
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
@@ -40,11 +40,14 @@ export default {
     })
   },
   transfer: (transaction) => {
-    const sender = transaction.from
-    const receiver = transaction.to
-    const amount = web3.toWei(transaction.amount, "ether")
 
-    return web3.eth.sendTransaction({from:sender, to:receiver, value: amount})
+    if (transaction.crypto === 'ETH') {
+      const amount = web3.toWei(transaction.amount, "ether")
+
+      return web3.eth.sendTransaction({from:transaction.from, to:transaction.to, value: amount})
+    } else {
+      return sendCoin(transaction)
+    }
   },
 
 }

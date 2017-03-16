@@ -14,15 +14,20 @@ var MetaCoin = contract(metacoin_artifacts);
 // Bootstrap the MetaCoin abstraction for Use.
 MetaCoin.setProvider(web3.currentProvider);
 
-export const sendCoin = (transaction) => {
+export const sendCoin = async (transaction) => {
 
-  return MetaCoin.deployed().then(function(instance) {
-    return instance.sendCoin(transaction.to, transaction.amount, {from: transaction.from});
-  }).then(function() {
-    console.log('Transaction successful!');
-  }).catch(function(e) {
-    console.log(e);
-  });
+  let meta = await MetaCoin.deployed()
+  let result = await meta.sendCoin(transaction.to, transaction.amount, {from: web3.eth.coinbase});
+
+  console.log(`result: ${result}`)
+  return result
+  // return MetaCoin.deployed().then(function(instance) {
+  //   return instance.sendCoin(transaction.to, transaction.amount, {from: web3.eth.coinbase});
+  // }).then(function() {
+  //   console.log('Transaction successful!');
+  // }).catch(function(e) {
+  //   console.log(e);
+  // });
 
 }
 
