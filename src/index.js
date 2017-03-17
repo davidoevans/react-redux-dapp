@@ -7,6 +7,7 @@ import thunk from 'redux-thunk'
 import reducer from './reducers'
 import { getAllAccounts } from './actions'
 import { getSupportedCryptos } from './actions'
+import { toggleWatch } from './actions'
 import App from './containers/App'
 
 const middleware = [ thunk ];
@@ -21,6 +22,7 @@ const store = createStore(
 
 store.dispatch(getAllAccounts())
 store.dispatch(getSupportedCryptos())
+store.dispatch(toggleWatch())
 
 render(
   <Provider store={store}>

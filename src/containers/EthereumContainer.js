@@ -19,16 +19,27 @@ const EthereumContainer = ({ accounts, cryptos, selectFromAddress, selectToAddre
         </div>
         <div className="panel-body">
           <div className="row">
-            <div className="col-sm-10">
+            <div className="col-sm-8">
               <form className="form-horizontal">
                 <AddressDropdown label="From" accounts={accounts} action={selectFromAddress} />
                 <AddressDropdown label="To" accounts={accounts} action={selectToAddress} />
                 <CryptoDropdown label="Crypto" cryptos={cryptos} action={selectCrypto} />
                 <AmountInput label="Amount" action={enterAmount} />
-            </form>
-            </div>
-            <div className="col-sm-1">
+              </form>
               <button type="submit" className="btn btn-primary" onClick={() => emitTransfer()}>Transfer</button>
+            </div>
+            <div className="col-sm-4">
+                <div className="row">
+                  <div className="col-xs-12 col-md-3 col-lg-3 pull-left">
+                    <div className="panel panel-default height">
+                      <div className="panel-heading">Billing Details</div>
+                      <div className="panel-body">
+                          <strong>David Peere:</strong><br/>
+                          <strong>22 203</strong><br/>
+                      </div>
+                    </div>
+                  </div>
+              </div>
             </div>
           </div>
           <AccountTable accounts={accounts} />

@@ -75,6 +75,28 @@ export const emitTransfer = () => (dispatch, getState) => {
   dispatch(getAllAccounts())
 }
 
+const setWatch = watch => ({
+  type: types.WATCH,
+  watch: true
+})
+
+export const toggleWatch = () => (dispatch, getState) => {
+    let watch = getState().watch
+    ethereum.watch(true)
+    dispatch(setWatch(watch))
+}
+
+// const block = transactions => ({
+//   type: types.RECEIPT,
+//   transactions: transactions
+// })
+//
+// export const recieveBlock = () => (dispatch, getState) => {
+//   let txns = getState().blocks.transactions
+//   // dispatch(block(txns))
+//   // dispatch(getAllAccounts())
+// }
+
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
 
 // Resets the currently visible error message
