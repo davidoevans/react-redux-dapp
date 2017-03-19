@@ -32,8 +32,12 @@ export const sendCoin = async (transaction) => {
 }
 
 export const getBalance = async (address) => {
-  let meta = await MetaCoin.deployed()
-  let balance = await meta.getBalance.call(address)
+  try {
+    let meta = await MetaCoin.deployed()
+    let balance = await meta.getBalance.call(address)
 
-  return balance.toNumber()
+    return balance.toNumber()
+  } catch (err) {
+    return 'Not Deployed'
+  }
 }

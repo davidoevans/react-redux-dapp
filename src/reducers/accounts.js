@@ -16,7 +16,6 @@ const accounts = (state = {}, action) => {
 }
 
 const byAddress = (state = {}, action) => {
-  //debugger;
   switch (action.type) {
     case types.RECEIVE_ACCOUNTS:
       return {
@@ -39,7 +38,6 @@ const byAddress = (state = {}, action) => {
 }
 
 const allAccounts = (state = [], action) => {
-  //debugger;
   switch (action.type) {
     case types.RECEIVE_ACCOUNTS:
       return action.accounts.map(account => account.address)

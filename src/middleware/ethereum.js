@@ -48,19 +48,6 @@ export default {
     } else {
       return sendCoin(transaction)
     }
-  },
-  watch: (on) => {
-    let filter = web3.eth.filter('latest');
-    if (on) {
-      filter.watch(function(error, result) {
-        // dispatch(receipt(result))
-        var block = web3.eth.getBlock(result, true);
-        console.log('block #' + block.number);
-        console.dir(block.transactions);
-      })
-    } else {
-        filter.stopWatching()
-    }
   }
 
 }

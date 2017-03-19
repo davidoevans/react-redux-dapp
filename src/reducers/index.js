@@ -3,6 +3,6 @@ import { combineReducers } from 'redux'
 import accounts from './accounts'
 import cryptos from './cryptos'
 import transaction from './transaction'
-//import watch from './watchers'
+import transactions from './transactions'
 
-export default combineReducers({ accounts, transaction, cryptos })
+export default combineReducers({ accounts, transactions, transaction, cryptos })
