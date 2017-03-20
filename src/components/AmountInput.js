@@ -22,8 +22,8 @@ class AmountInput extends React.Component {
 
     return (
       <div className={formClass}>
-        <label className="col-sm-2 control-label">{this.props.label}:</label>
-        <div className="col-sm-6">
+        <label className="col-sm-3 control-label">{this.props.label}</label>
+        <div className="col-sm-9">
             <input className="form-control" onChange={this.handleChange} onBlur={(e) => this.props.action(e.target.value)} />
         </div>
       </div>
