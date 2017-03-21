@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { getAllAccounts } from '../reducers/accounts'
 import { getSupportedCryptos } from '../reducers/cryptos'
@@ -9,7 +9,7 @@ import AmountInput from '../components/AmountInput'
 import AccountTable from '../components/AccountTable'
 import TransactionTable from '../components/TransactionTable'
 
-const EthereumContainer = ({ accounts, cryptos, addTransaction, transactions, selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer }) => {
+const YAEEContainer = ({ accounts, cryptos, addTransaction, transactions, selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer }) => {
   return (
     <div className="container">
       <div className="row">
@@ -55,13 +55,6 @@ const EthereumContainer = ({ accounts, cryptos, addTransaction, transactions, se
     </div>
 )}
 
-EthereumContainer.propTypes = {
-  accounts: PropTypes.arrayOf(PropTypes.shape({
-    address: PropTypes.string.isRequired,
-    balance: PropTypes.object.isRequired
-  })).isRequired
-}
-
 const mapStateToProps = state => ({
   accounts: getAllAccounts(state.accounts),
   cryptos: getSupportedCryptos(state.cryptos),
@@ -71,4 +64,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer, addTransaction }
-)(EthereumContainer)
+)(YAEEContainer)

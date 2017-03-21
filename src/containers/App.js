@@ -1,10 +1,10 @@
 import React from 'react'
-import EthereumContainer from './EthereumContainer'
+import YAEEContainer from './YAEEContainer'
 
 const App = () => (
   <div>
     <hr/>
-    <EthereumContainer />
+    <YAEEContainer />
   </div>
 )
 

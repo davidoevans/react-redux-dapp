@@ -33,7 +33,7 @@ const TransactionTable = ({ transactions }) => (
   <ReactTable data={transactions}
     columns={columns}
     showPagination={false}
-    showPageSizeOptions={false}
+    showPageSizeOptions={true}
     defaultPageSize={3}
     getTdProps={(state, rowInfo, column, instance) => {
       return {
