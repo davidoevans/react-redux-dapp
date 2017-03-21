@@ -15,7 +15,7 @@ const EthereumContainer = ({ accounts, cryptos, addTransaction, transactions, se
       <div className="row">
         <div className="panel panel-primary">
           <div className="panel-heading">
-            <h3>Ethereum - react-redux-dapp</h3>
+            <h3>YAEE - Yet Another Ethereum Explorer</h3>
           </div>
         </div>
         <div className="panel-body">
