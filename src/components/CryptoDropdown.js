@@ -6,6 +6,7 @@ const CryptoDropdown = ({ label, cryptos, action }) => (
     <div className="col-sm-10">
       <select className="form-control" onChange={
           (e) => action(e.target.value)}>
+        <option value="" selected disabled>Select Account</option>
         {cryptos.map(crypto =>
           <option key={crypto.id}>{crypto.symbol}</option>
           )
