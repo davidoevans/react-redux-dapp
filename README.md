@@ -1,5 +1,5 @@
 # react-redux-dapp
-This is a template project that can be used as the basis for an Ethereum dApp.
+This is a template project that can be used as the basis for an Ethereum Dapp.
 
 <img src=docs/img/react-redux-dapp.png width="300">
 
