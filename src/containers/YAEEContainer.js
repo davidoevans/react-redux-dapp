@@ -27,12 +27,12 @@ const YAEEContainer = ({ accounts, cryptos, addTransaction, transactions, select
                 <CryptoDropdown label="Crypto" cryptos={cryptos} action={selectCrypto} />
               </div>
               <div className="form-horizontal">
-                <div className="form-group">
+                <div className="form-group form-group-sm">
                 <div className="col-sm-8">
                   <AmountInput label="Amount" action={enterAmount} />
                 </div>
                 <div className="col-sm-2">
-                  <button type="submit" className="btn btn-primary" onClick={() => emitTransfer()}>Transfer</button>
+                  <button type="submit" className="btn btn-primary btn-sm" onClick={() => emitTransfer()}>Transfer</button>
                 </div>
               </div>
               </div>
@@ -46,8 +46,8 @@ const YAEEContainer = ({ accounts, cryptos, addTransaction, transactions, select
               </div>
             </div>
           </div>
-          <hr/>
-          <TransactionTable transactions={transactions} />
+            <hr/>
+            <TransactionTable id="transaction_table" transactions={transactions} />
           <hr/>
           <AccountTable accounts={accounts} />
         </div>
