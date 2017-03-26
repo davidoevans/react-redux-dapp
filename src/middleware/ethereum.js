@@ -19,7 +19,7 @@ const accountNames = [
   'R3'
 ];
 
-const CADcoin = 38
+const CADcoin = 68
 
 export default {
   getAccounts: (cb) => {
