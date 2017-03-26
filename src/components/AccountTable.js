@@ -5,10 +5,12 @@ import 'react-table/react-table.css'
 const columns = [{
   header: 'Public Address',
   accessor: 'address' // String-based value accessors!
-}, {
-  header: 'Name',
-  accessor: 'name'
-}, {
+},
+// {
+//   header: 'Name',
+//   accessor: 'name'
+// },
+{
   header: 'Balance',
   columns: [{
     header: 'Intrinsic (ETH)',
