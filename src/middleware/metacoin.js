@@ -14,7 +14,7 @@ MetaCoin.setProvider(web3.currentProvider);
 export const sendCoin = async (transaction) => {
 
   let meta = await MetaCoin.deployed()
-  let result = await meta.sendCoin(transaction.to, transaction.amount, {from: web3.eth.coinbase});
+  let result = await meta.sendCoin(transaction.to, transaction.amount, {from: transaction.from});
 
   console.log(`result: ${result}`)
   return result
