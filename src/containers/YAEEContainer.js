@@ -28,26 +28,17 @@ const YAEEContainer = ({ accounts, cryptos, addTransaction, transactions, select
               </div>
               <div className="form-horizontal">
                 <div className="form-group form-group-sm">
-                <div className="col-sm-8">
-                  <AmountInput label="Amount" action={enterAmount} />
-                </div>
-                <div className="col-sm-2">
-                  <button type="submit" className="btn btn-primary btn-sm" onClick={() => emitTransfer()}>Transfer</button>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div className="col-sm-6">
-              <div className="panel panel-default height">
-                <div className="panel-heading">Transaction Details</div>
-                <div className="panel-body">
-                  <strong>David Peere:</strong><br/>
+                  <div className="col-sm-8">
+                    <AmountInput label="Amount" action={enterAmount} />
+                  </div>
+                  <div className="col-sm-2">
+                    <button type="submit" className="btn btn-primary btn-sm" onClick={() => emitTransfer()}>Transfer</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-            <hr/>
-            <TransactionTable id="transaction_table" transactions={transactions} />
+          <TransactionTable id="transaction_table" transactions={transactions} />
           <hr/>
           <AccountTable accounts={accounts} />
         </div>

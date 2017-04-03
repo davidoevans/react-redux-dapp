@@ -3,12 +3,12 @@ import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 
 const columns = [{
-  header: 'Block Hash',
-  accessor: 'blockHash' // String-based value accessors!
-}, {
-  header: 'Block Number',
-  accessor: 'blockNumber'
-}, {
+  header: 'Block',
+  columns: [{
+    header: 'Block Number',
+    accessor: 'blockNumber'
+  }],
+  }, {
   header: 'Transaction',
   columns: [{
     header: 'Hash',
@@ -20,12 +20,21 @@ const columns = [{
     header: 'To',
     accessor: 'to'
   }, {
-    header: 'Gas',
-    accessor: 'gas'
+    header: 'Gas Used',
+    accessor: 'gasUsed'
   }, {
     header: 'Gas Price',
     accessor: 'gasPrice',
     render: props => <span className='number'>{props.value.toNumber()}</span>
+  }, {
+    header: 'Cost',
+    accessor: 'cost'
+  }, {
+    header: 'Cost (ETH)',
+    accessor: 'costEth'
+  }, {
+    header: 'Cost (CAD)',
+    accessor: 'costCAD'
   }]
 }];
 
@@ -38,7 +47,7 @@ const TransactionTable = ({ transactions }) => (
     getTdProps={(state, rowInfo, column, instance) => {
       return {
         onClick: e => {
-
+          e.preventDefault()
           console.log(`event: ${e}`)
           console.log(`rowInfo: ${rowInfo.rowValues.blockHash}`)
 

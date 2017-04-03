@@ -31,7 +31,6 @@ export const showTransactions = transactions => ({
 })
 
 export const addTransaction = transaction => (dispatch, getState) => {
-  debugger
   dispatch(addTransactionAction(transaction))
 }
 
@@ -104,16 +103,26 @@ export const emitTransfer = () => (dispatch, getState) => {
 export const fetchTransactions = () => (dispatch, getState) => {
   let filter = web3.eth.filter('latest');
   return filter.watch(function(error, result) {
-      var txn = web3.eth.getTransaction(result)
-      console.log(`txn: ${txn}`)
+      if (error) {
+        console.log(error)
+      } else{
+        console.log(`result: ${result}`)
+        var block = web3.eth.getBlock(result, true)
 
-      console.log(`result: ${result}`)
-      var block = web3.eth.getBlock(result, true)
-      console.log('block #' + block.number)
-      console.dir(block.transactions)
-      dispatch(addTransactionAction(block.transactions[0]))
-      dispatch(showTransactions(getState().transactions))
-      dispatch(getAllAccounts())
+        console.log('block #' + block.number)
+        console.dir(block.transactions)
+        //console.log(web3.version)
+        //debugger
+
+        // we know there is only 1 txn per block in test...accessing only the first transactions
+        // in a block won't work beyond localhost
+        let txn = block.transactions[0]
+        txn.receipt = web3.eth.getTransactionReceipt(block.transactions[0].hash)
+        dispatch(addTransactionAction(txn))
+        dispatch(showTransactions(getState().transactions))
+        dispatch(getAllAccounts())
+        //debugger
+      }
     }
   )
 
