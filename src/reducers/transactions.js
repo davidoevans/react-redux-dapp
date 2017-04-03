@@ -1,4 +1,7 @@
 import * as types from '../constants/ActionTypes'
+import Web3 from 'web3'
+
+const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
 const transaction = (state, action) => {
   switch (action.type) {
@@ -10,8 +13,11 @@ const transaction = (state, action) => {
         from: action.transaction.from,
         to: action.transaction.to,
         nonce: action.transaction.nonce,
-        gas: action.transaction.gas,
-        gasPrice: action.transaction.gasPrice
+        gasUsed: action.transaction.receipt.gasUsed,
+        gasPrice: action.transaction.gasPrice,
+        cost: action.transaction.receipt.gasUsed * action.transaction.gasPrice.toNumber(),
+        costEth: web3.fromWei(action.transaction.receipt.gasUsed * action.transaction.gasPrice.toNumber(), 'ether'),
+        costCAD: web3.fromWei(action.transaction.receipt.gasUsed * action.transaction.gasPrice.toNumber(), 'ether') * 68
       }
     default:
       return state
