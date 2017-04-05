@@ -1,38 +1,38 @@
 import ethereum from '../middleware/ethereum'
 import crypto from '../middleware/crypto'
-import * as types from '../constants/ActionTypes'
+import { RECEIVE_ACCOUNTS } from '../reducers/accounts'
+import { RECEIVE_SUPPORTED_CRYPTOS } from '../reducers/cryptos'
+import { SELECT_CRYPTO, SELECT_FROM_ADDRESS, SELECT_TO_ADDRESS, ENTER_AMOUNT } from '../reducers/transaction'
+import { SHOW_TRANSACTIONS, ADD_TRANSACTION } from '../reducers/transactions'
+
 import Web3 from 'web3'
 
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
 const receiveAccounts = accounts => ({
-  type: types.RECEIVE_ACCOUNTS,
+  type: RECEIVE_ACCOUNTS,
   accounts: accounts
 })
 
 const setFromAddress = address => ({
-  type: types.SELECT_FROM_ADDRESS,
+  type: SELECT_FROM_ADDRESS,
   address
 })
 
 const setToAddress = address => ({
-  type: types.SELECT_TO_ADDRESS,
+  type: SELECT_TO_ADDRESS,
   address
 })
 
 export const addTransactionAction = transaction => ({
-  type: types.ADD_TRANSACTION,
+  type: ADD_TRANSACTION,
   transaction
 })
 
 export const showTransactions = transactions => ({
-  type: types.SHOW_TRANSACTIONS,
+  type: SHOW_TRANSACTIONS,
   transactions
 })
-
-export const addTransaction = transaction => (dispatch, getState) => {
-  dispatch(addTransactionAction(transaction))
-}
 
 export const selectFromAddress = address => (dispatch, getState) => {
   dispatch(setFromAddress(address))
@@ -56,7 +56,7 @@ export const getAllAccounts = () => (dispatch, getState) => {
 }
 
 const setCrypto = id => ({
-  type: types.SELECT_CRYPTO,
+  type: SELECT_CRYPTO,
   crypto: id
 })
 
@@ -65,7 +65,7 @@ export const selectCrypto = id => (dispatch, getState) => {
 }
 
 const receiveSupportedCryptos = cryptos => ({
-  type: types.RECEIVE_SUPPORTED_CRYPTOS,
+  type: RECEIVE_SUPPORTED_CRYPTOS,
   cryptos: cryptos
 })
 
@@ -79,7 +79,7 @@ export const getSupportedCryptos = () => (dispatch, getState) => {
 }
 
 const setAmount = amount => ({
-  type: types.ENTER_AMOUNT,
+  type: ENTER_AMOUNT,
   amount
 })
 
@@ -87,17 +87,10 @@ export const enterAmount = amount => (dispatch, getState) => {
     dispatch(setAmount(amount))
 }
 
-const transfer = txnHash => ({
-  type: types.TRANSFER,
-  confirmation: txnHash
-})
-
 export const emitTransfer = () => (dispatch, getState) => {
   let txn = getState().transaction.detail
   let txnHash = ethereum.transfer(txn)
   console.log(`txnHash: ${txnHash}`)
-  dispatch(transfer(txnHash))
-  dispatch(getAllAccounts())
 }
 
 export const fetchTransactions = () => (dispatch, getState) => {

@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux'
 import deepfreeze from 'deep-freeze'
 import expect from 'expect'
-import * as types from '../constants/ActionTypes'
+
+export const RECEIVE_ACCOUNTS = 'RECEIVE_ACCOUNTS'
+export const ADD_ACCOUNT = 'ADD_ACCOUNT'
 
 const accounts = (state = {}, action) => {
   switch (action.type) {
-    case types.ADD_ACCOUNT:
+    case ADD_ACCOUNT:
       return {
         ...state,
         accounts: action.accounts
@@ -17,7 +19,7 @@ const accounts = (state = {}, action) => {
 
 const byAddress = (state = {}, action) => {
   switch (action.type) {
-    case types.RECEIVE_ACCOUNTS:
+    case RECEIVE_ACCOUNTS:
       return {
         ...state,
         ...action.accounts.reduce((obj, account) => {
@@ -39,7 +41,7 @@ const byAddress = (state = {}, action) => {
 
 const allAccounts = (state = [], action) => {
   switch (action.type) {
-    case types.RECEIVE_ACCOUNTS:
+    case RECEIVE_ACCOUNTS:
       return action.accounts.map(account => account.address)
     default:
       return state
@@ -61,7 +63,7 @@ export const getAllAccounts = state =>
 const testAccounts = () => {
   const stateBefore = [];
   const action = {
-    type: types.RECEIVE_ACCOUNTS,
+    type: RECEIVE_ACCOUNTS,
     accounts: [
       { address: 'abc', balance: 100}
     ]

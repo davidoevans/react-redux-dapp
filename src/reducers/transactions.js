@@ -1,11 +1,13 @@
-import * as types from '../constants/ActionTypes'
 import Web3 from 'web3'
+
+export const SHOW_TRANSACTIONS = 'SHOW_TRANSACTIONS'
+export const ADD_TRANSACTION = 'ADD_TRANSACTION'
 
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
 const transaction = (state, action) => {
   switch (action.type) {
-    case types.ADD_TRANSACTION:
+    case ADD_TRANSACTION:
       return {
         blockHash: action.transaction.blockHash,
         blockNumber: action.transaction.blockNumber,
@@ -26,7 +28,7 @@ const transaction = (state, action) => {
 
 const transactions = (state = [], action) => {
   switch (action.type) {
-    case types.ADD_TRANSACTION:
+    case ADD_TRANSACTION:
       return [
         transaction(undefined, action),
           ...state

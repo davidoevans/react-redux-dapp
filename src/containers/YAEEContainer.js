@@ -2,14 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getAllAccounts } from '../reducers/accounts'
 import { getSupportedCryptos } from '../reducers/cryptos'
-import { selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer, addTransaction } from '../actions'
+import { selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer } from '../actions'
 import AddressDropdown from '../components/AddressDropdown'
 import CryptoDropdown from '../components/CryptoDropdown'
 import AmountInput from '../components/AmountInput'
 import AccountTable from '../components/AccountTable'
 import TransactionTable from '../components/TransactionTable'
 
-const YAEEContainer = ({ accounts, cryptos, addTransaction, transactions, selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer }) => {
+const YAEEContainer = ({ accounts, cryptos, transactions, selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer }) => {
   return (
     <div className="container">
       <div className="row">
@@ -54,5 +54,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer, addTransaction }
+  { selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer }
 )(YAEEContainer)
