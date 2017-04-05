@@ -1,25 +1,29 @@
 import { combineReducers } from 'redux'
-import * as types from '../constants/ActionTypes'
+
+export const SELECT_CRYPTO = 'SELECT_CRYPTO'
+export const SELECT_FROM_ADDRESS = 'SELECT_FROM_ADDRESS'
+export const SELECT_TO_ADDRESS = 'SELECT_TO_ADDRESS'
+export const ENTER_AMOUNT = 'ENTER_AMOUNT'
 
 const detail = (state = {}, action) => {
   switch (action.type) {
-    case types.SELECT_FROM_ADDRESS:
+    case SELECT_FROM_ADDRESS:
       console.log(`reducer: SELECT_FROM_ADDRESS ${action.fromAddress}`)
       return {
         ...state,
         from: action.address
       }
-    case types.SELECT_TO_ADDRESS:
+    case SELECT_TO_ADDRESS:
       return {
         ...state,
         to: action.address
       }
-    case types.SELECT_CRYPTO:
+    case SELECT_CRYPTO:
       return {
         ...state,
         crypto: action.crypto
       }
-    case types.ENTER_AMOUNT:
+    case ENTER_AMOUNT:
       return {
         ...state,
         amount: action.amount

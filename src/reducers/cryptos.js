@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
-import * as types from '../constants/ActionTypes'
+
+export const RECEIVE_SUPPORTED_CRYPTOS = 'RECEIVE_SUPPORTED_CRYPTOS'
 
 const cryptos = (state = {}, action) => {
   switch (action.type) {
-    case types.RECEIVE_SUPPORTED_CRYPTOS:
+    case RECEIVE_SUPPORTED_CRYPTOS:
       return {
         ...state,
         supported: action.cryptos
@@ -16,7 +17,7 @@ const cryptos = (state = {}, action) => {
 const byId = (state = {}, action) => {
   //debugger;
   switch (action.type) {
-    case types.RECEIVE_SUPPORTED_CRYPTOS:
+    case RECEIVE_SUPPORTED_CRYPTOS:
       return {
         ...state,
         ...action.cryptos.reduce((obj, crypto) => {
@@ -39,7 +40,7 @@ const byId = (state = {}, action) => {
 const allCryptos = (state = [], action) => {
   //debugger;
   switch (action.type) {
-    case types.RECEIVE_SUPPORTED_CRYPTOS:
+    case RECEIVE_SUPPORTED_CRYPTOS:
       return action.cryptos.map(crypto => crypto.id)
     default:
       return state
