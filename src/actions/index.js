@@ -1,8 +1,8 @@
 import ethereum from '../middleware/ethereum'
 import crypto from '../middleware/crypto'
 import { RECEIVE_ACCOUNTS } from '../reducers/accounts'
-import { RECEIVE_SUPPORTED_CRYPTOS } from '../reducers/cryptos'
-import { SELECT_CRYPTO, SELECT_FROM_ADDRESS, SELECT_TO_ADDRESS, ENTER_AMOUNT } from '../reducers/transaction'
+import { RECEIVE_CRYPTOS } from '../reducers/cryptos'
+import { SELECT_CRYPTO, SELECT_FROM_ADDRESS, SELECT_TO_ADDRESS, ENTER_AMOUNT } from '../reducers/transfer'
 import { SHOW_TRANSACTIONS, ADD_TRANSACTION } from '../reducers/transactions'
 
 import Web3 from 'web3'
@@ -45,10 +45,10 @@ export const selectToAddress = address => (dispatch, getState) => {
 export const getAllAccounts = () => (dispatch, getState) => {
   ethereum.getAccounts(accounts => {
     dispatch(receiveAccounts(accounts))
-    if (typeof getState().transaction.detail.from === "undefined") {
+    if (typeof getState().transfer.detail.from === "undefined") {
       dispatch(setFromAddress(accounts[0].address))
     }
-    if (typeof getState().transaction.detail.to === "undefined") {
+    if (typeof getState().transfer.detail.to === "undefined") {
       dispatch(setToAddress(accounts[1].address))
     }
 
@@ -65,14 +65,14 @@ export const selectCrypto = id => (dispatch, getState) => {
 }
 
 const receiveSupportedCryptos = cryptos => ({
-  type: RECEIVE_SUPPORTED_CRYPTOS,
+  type: RECEIVE_CRYPTOS,
   cryptos: cryptos
 })
 
-export const getSupportedCryptos = () => (dispatch, getState) => {
+export const getCryptos = () => (dispatch, getState) => {
   crypto.getCryptos(cryptos => {
     dispatch(receiveSupportedCryptos(cryptos))
-    if (typeof getState().transaction.detail.crypto === "undefined") {
+    if (typeof getState().transfer.detail.crypto === "undefined") {
       dispatch(setCrypto(cryptos[0]))
     }
   })
@@ -88,7 +88,7 @@ export const enterAmount = amount => (dispatch, getState) => {
 }
 
 export const emitTransfer = () => (dispatch, getState) => {
-  let txn = getState().transaction.detail
+  let txn = getState().transfer.detail
   let txnHash = ethereum.transfer(txn)
   console.log(`txnHash: ${txnHash}`)
 }
