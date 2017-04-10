@@ -1,23 +1,11 @@
 import { combineReducers } from 'redux'
 
-export const RECEIVE_SUPPORTED_CRYPTOS = 'RECEIVE_SUPPORTED_CRYPTOS'
-
-const cryptos = (state = {}, action) => {
-  switch (action.type) {
-    case RECEIVE_SUPPORTED_CRYPTOS:
-      return {
-        ...state,
-        supported: action.cryptos
-      }
-    default:
-      return state
-  }
-}
+export const RECEIVE_CRYPTOS = 'RECEIVE_CRYPTOS'
 
 const byId = (state = {}, action) => {
   //debugger;
   switch (action.type) {
-    case RECEIVE_SUPPORTED_CRYPTOS:
+    case RECEIVE_CRYPTOS:
       return {
         ...state,
         ...action.cryptos.reduce((obj, crypto) => {
@@ -26,13 +14,6 @@ const byId = (state = {}, action) => {
         }, {})
       }
       default:
-        const { id } = action
-        if (id) {
-          return {
-            ...state,
-            [id]: cryptos(state[id], action)
-          }
-        }
         return state
   }
 }
@@ -40,18 +21,18 @@ const byId = (state = {}, action) => {
 const allCryptos = (state = [], action) => {
   //debugger;
   switch (action.type) {
-    case RECEIVE_SUPPORTED_CRYPTOS:
+    case RECEIVE_CRYPTOS:
       return action.cryptos.map(crypto => crypto.id)
     default:
       return state
   }
 }
 
-export const getCrypto = (state, id) =>
+export const getCryptoById = (state, id) =>
   state.byId[id]
 
 export const getSupportedCryptos = state =>
-  state.allCryptos.map(id => getCrypto(state, id))
+  state.allCryptos.map(id => getCryptoById(state, id))
 
 export default combineReducers({
   byId,

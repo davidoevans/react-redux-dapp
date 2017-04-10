@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 import thunkMiddleware from 'redux-thunk'
 import reducer from './reducers'
 import { getAllAccounts } from './actions'
-import { getSupportedCryptos } from './actions'
+import { getCryptos } from './actions'
 import { fetchTransactions } from './actions'
 import App from './containers/App'
 
@@ -21,7 +21,7 @@ const store = createStore(
   applyMiddleware(thunkMiddleware, ...middleware),
 )
 store.dispatch(getAllAccounts())
-store.dispatch(getSupportedCryptos())
+store.dispatch(getCryptos())
 store.dispatch(fetchTransactions())
 
 render(
