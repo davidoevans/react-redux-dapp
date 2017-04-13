@@ -8,10 +8,14 @@ import CryptoDropdown from '../components/CryptoDropdown'
 import AmountInput from '../components/AmountInput'
 import AccountTable from '../components/AccountTable'
 import TransactionTable from '../components/TransactionTable'
+import UPortView from '../components/uport/UPortView'
 
 const YAEEContainer = ({ accounts, cryptos, transactions, selectFromAddress, selectToAddress, selectCrypto, enterAmount, emitTransfer }) => {
   return (
     <div className="container">
+      <div className="row">
+        <UPortView />
+      </div>
       <div className="row">
         <div className="panel panel-primary">
           <div className="panel-heading">
