@@ -1,11 +1,19 @@
 import React from 'react'
-import YAEEContainer from './YAEEContainer'
+import NavBar from '../components/nav/NavBar'
 
-const App = () => (
-  <div>
-    <hr/>
-    <YAEEContainer />
-  </div>
-)
+const navdata = [{"title": "Home", "href": "/"}, {"title": "YAEE", "href": "/yaee"}]
+
+class App extends React.Component {
+
+    render() {
+      return (
+        <div>
+          <NavBar navData={navdata}/>
+          <hr/>
+          {this.props.children}
+        </div>
+      )
+    }
+}
 
 export default App

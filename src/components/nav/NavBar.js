@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import NavItem from './NavItem';
 import { Link } from 'react-router';
 
